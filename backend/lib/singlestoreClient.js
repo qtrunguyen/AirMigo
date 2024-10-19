@@ -27,6 +27,19 @@ export async function initializeDatabase() {
         password: { type: "TEXT", nullable: true },
       },
     });
+
+    const traffic_table = await database_1.table.create({
+      name: "traffic_table",
+      columns: {
+        frc: { type: "TEXT", nullable: false },
+        currentSpeed: { type: "INT", nullable: false },
+        freeFlowSpeed: { type: "INT", nullable: false },
+        currentTravelTime: { type: "INT", nullable: false },
+        freeFlowTravelTime: { type: "INT", nullable: false },
+        confidence: { type: "FLOAT", nullable: false },
+        roadClosure: { type: "BOOLEAN", nullable: false },
+      },
+    });
     return database_1;
     
   } catch (error) {
