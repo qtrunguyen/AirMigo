@@ -2,12 +2,19 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { signUpUser } from './core/auth/signup.js';
 import { logInUser } from './core/auth/login.js';
+import { getCurrentAir } from './lib/airquality.js';
 
+getCurrentAir({
+    "location": {
+        "latitude": 37.419734,
+        "longitude": -122.0827784
+    }
+})
 signUpUser('test', 'password')
 logInUser('test', 'password')
 
 const app = express();
-app.use(express.json()); 
+app.use(express.json());
 
 // Sign-up route
 app.post('/signup', async (req, res) => {
