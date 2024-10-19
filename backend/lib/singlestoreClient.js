@@ -20,8 +20,8 @@ export async function initializeDatabase() {
         tables: {},
       });
 
-      const table_1 = await database_1.table.create({
-        name: "table_1",
+      const users_table = await database_1.table.create({
+        name: "users_table",
         columns: {
           id: { type: "BIGINT", nullable: false },
           username: { type: "TEXT", nullable: false },
