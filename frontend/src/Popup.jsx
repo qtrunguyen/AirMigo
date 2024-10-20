@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 
-export default function Popup({ response, openChat, setOpenChat }) {
+export default function Popup({ response, openChat, setOpenChat, delCircle }) {
     const closePopup = (e) => {
+        delCircle()
         setOpenChat(false);
     };
 

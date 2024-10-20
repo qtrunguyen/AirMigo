@@ -102,11 +102,13 @@ function GMap() {
                     setConditions={setConditions}
                     fetchData={fetchData}
                     setOpenChat={setOpenChat}
+                    delCircle={delCircle}
                 ></Panel>
                 <Popup
                     response={response}
                     openChat={openChat}
                     setOpenChat={setOpenChat}
+                    delCircle={delCircle}
                 ></Popup>
             </APIProvider>
         </div>

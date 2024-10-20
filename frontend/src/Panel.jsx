@@ -7,7 +7,8 @@ export default function Panel({
     conditions,
     setConditions,
     updateLocation,
-    setOpenChat
+    setOpenChat,
+    delCircle
 }) {
     const map = useMap();
     const handleLocationUpdate = (e) => {
@@ -25,9 +26,11 @@ export default function Panel({
 
     const handleGetInsights = (event) => {
         fetchData();
+        setOpenChat(true);
     };
 
     const handleToggleAssistant = (event) => {
+        delCircle()
         setOpenChat(prev => !prev);
     }
 
