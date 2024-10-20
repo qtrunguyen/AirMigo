@@ -31,6 +31,8 @@ export async function initializeDatabase() {
     const traffic_table = await database_1.table.create({
       name: "traffic_table",
       columns: {
+        latitude: { type: "TEXT", nullable: false },
+        longitude: { type: "TEXT", nullable: false },
         frc: { type: "TEXT", nullable: false },
         currentSpeed: { type: "INT", nullable: false },
         freeFlowSpeed: { type: "INT", nullable: false },
@@ -38,6 +40,20 @@ export async function initializeDatabase() {
         freeFlowTravelTime: { type: "INT", nullable: false },
         confidence: { type: "FLOAT", nullable: false },
         roadClosure: { type: "BOOLEAN", nullable: false },
+      },
+    });
+
+    const airquality_table = await database_1.table.create({
+      name: "airquality_table",
+      columns: {
+        latitude: { type: "TEXT", nullable: false },
+        longitude: { type: "TEXT", nullable: false },
+        aqi: { type: "INT", nullable: false },
+        red: { type: "FLOAT", nullable: false },
+        green: { type: "FLOAT", nullable: false },
+        blue: { type: "FLOAT", nullable: false },
+        category: { type: "TEXT", nullable: false },
+        dominant_pollutant: { type: "TEXT", nullable: false },
       },
     });
     return database_1;

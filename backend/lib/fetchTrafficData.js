@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import { initializeDatabase } from './singlestoreClient.js';
 
 
-export async function fetchTrafficDensity() {
-    const url = `https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?key=${process.env.TRAFFIC_API_KEY}&point=52.41072,4.84239`;
+export async function fetchTrafficDensity(latitude, longitude) {
+    const url = `https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?key=${process.env.TRAFFIC_API_KEY}&point=${latitude},${longitude}`;
     const db = await initializeDatabase(); // Connect to the DB
 
     let traffic_table;
@@ -23,6 +23,8 @@ export async function fetchTrafficDensity() {
             //console.log(response.data)
             try {
                 await traffic_table.insert({
+                    latitude: String(latitude),
+                    longitude: String(longitude),
                     frc: response.data.flowSegmentData.frc,
                     currentSpeed: response.data.flowSegmentData.currentSpeed,
                     freeFlowSpeed: response.data.flowSegmentData.freeFlowSpeed,

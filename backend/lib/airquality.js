@@ -1,13 +1,42 @@
 import axios from 'axios'
+import dotenv from 'dotenv'
+import { initializeDatabase } from './singlestoreClient.js'
 
-const ENDPOINT = 'https://airquality.googleapis.com/v1'
-const GOOGLE_KEY = process.env.GOOGLE_AIR_QUALITY_KEY
+export async function getCurrentAir(latitude, longitude) {
+    const requestBody = {
+        "location": {
+            "latitude": latitude,
+            "longitude": longitude
+        }
+    }
+    const db = await initializeDatabase(); // Connect to the DB
 
-export async function getCurrentAir(requestBody) {
+    let airquality_table;
+
+    try {
+        airquality_table = db.table.use('airquality_table');
+    }
+    catch (error) {
+        console.error('Table error:', error);
+    }
+
     axios
-        .post(`${ENDPOINT}/currentConditions:lookup?key=${GOOGLE_KEY}`, requestBody)
+        .post(`https://airquality.googleapis.com/v1/currentConditions:lookup?key=${process.env.GOOGLE_AIR_QUALITY_KEY}`, requestBody)
         .then(response => {
-            console.log(response.data)
+            try {
+                airquality_table.insert({
+                    latitude: String(latitude),
+                    longitude: String(longitude),
+                    aqi: response.data.indexes[0].aqi,
+                    red: response.data.indexes[0].color.red,
+                    green: response.data.indexes[0].color.green,
+                    blue: response.data.indexes[0].color.blue,
+                    category: response.data.indexes[0].category,
+                    dominant_pollutant: response.data.indexes[0].dominantPollutant
+                });
+            } catch (error) {
+                console.error(`Error inserting data into database: ${error.message}`);
+            }
         })
         .catch(err => {
             console.log("TRIED getCurrentAir(). Met with error:")
