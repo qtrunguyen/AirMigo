@@ -1,12 +1,12 @@
 import React from "react";
 
 function Nav() {
-    const navitems = [{ name: "About", link: "/about", note: "?" }];
+    const navitems = [{ name: "About", link: "/about", note: "about us" }];
 
     return (
         <div id="nav">
             <a href="/">
-                <img src="/AirMigoLogo.png" alt="Logo" className="nav-logo" />
+                <img src="AirMigoLogo.png" alt="Logo" className="nav-logo" />
             </a>
             <div className="navigation-link">
                 {navitems.map((item, index) => (
