@@ -1,12 +1,13 @@
-import React, { useRef, useEffect } from "react";
-import { APIProvider, Map, useMap } from "@vis.gl/react-google-maps";
+import React from "react";
+import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import PoiMarkers from "./PoiMarkers";
 import Panel from "./Panel";
+import Popup from "./Popup";
 
 // default
 let LAT = -33.860664;
 let LNG = 151.208138;
-let ZOOM = 13;
+let ZOOM = 15;
 
 const pois = []
 
@@ -35,6 +36,7 @@ function GMap() {
           <PoiMarkers pois={pois} />
         </Map>
         <Panel></Panel>
+        <Popup></Popup>
       </APIProvider>
     </div>
   );

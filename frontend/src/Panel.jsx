@@ -15,7 +15,6 @@ export default function Panel() {
                             lng: position.coords.longitude,
                         },
                     });
-                    console.log("hi");
                 },
                 (error) => {
                     console.log("Error getting geolocation:\n", error);
@@ -25,9 +24,6 @@ export default function Panel() {
     }
 
     updateLocation()
-
-    
-
 
     const togglePanel = (event) => {
         let parent = event.currentTarget.parentElement 

@@ -9,6 +9,20 @@
     --outer-space: 4px;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    /* Set the scrollbar width */
+    background-color: transparent;
+    /* Set the scrollbar track background color */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--white);
+    /* Set the scrollbar thumb background color */
+    border-radius: 5px;
+    /* Set the scrollbar thumb border radius */
+}
+
 * {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin: 0;
@@ -49,8 +63,8 @@ body {
     gap: var(--outer-space);
     padding: var(--outer-space);
     background:
-        linear-gradient(70deg, var(--lime), var(--electric-blue) ),
-        linear-gradient(120deg, var(--electric-blue), var(--lime) ),
+        linear-gradient(70deg, var(--lime), var(--electric-blue)),
+        linear-gradient(120deg, var(--electric-blue), var(--lime)),
         linear-gradient(170deg, var(--night), var(--electric-blue));
 }
 
@@ -61,7 +75,7 @@ body {
     align-items: center;
     border-radius: 10px;
     padding: 10px 20px 10px 20px;
-    background: var(--night);   
+    background: var(--night);
 }
 
 .navigation-link {
@@ -102,7 +116,7 @@ body {
     svg {
         transition: 0.5s;
     }
-    
+
 }
 
 
@@ -122,10 +136,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
     svg {
         color: white;
         font-size: 1.5rem;
     }
+
     padding: 5px;
     background: var(--night);
 }
@@ -134,6 +150,7 @@ body {
     flex: 1;
     padding: 5px;
     width: 96%;
+
     button {
         border-radius: 5px;
         color: var(--white);
@@ -142,15 +159,62 @@ body {
         padding: 5px;
         gap: 5px;
     }
-    border-top-left-radius: 5px; 
-    border-top-right-radius: 5px; 
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     border-top: 1px solid black;
     border-right: 1px solid black;
     border-left: 1px solid black;
+    background: linear-gradient(70deg, var(--lime2), var(--electric-blue2)),
+    linear-gradient(120deg, var(--electric-blue2), var(--lime2)),
+    linear-gradient(170deg, var(--lime2), var(--electric-blue2));
+
+}
+
+.popup-container {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 300px;
+    height: 100px;
+    background: var(--night);
+    border: solid 2px white;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.popup-header {
+    padding: 5px;
+    width: 100%;
     background:
         linear-gradient(70deg, var(--lime2), var(--electric-blue2)),
         linear-gradient(120deg, var(--electric-blue2), var(--lime2)),
         linear-gradient(170deg, var(--lime2), var(--electric-blue2));
-    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
+.popup-title {
+    max-height: 30px;
+    word-wrap: break-word;
+    overflow-y: hidden;
+}
+
+.popup-content {
+    flex: 1;
+    padding: 5px;
+    word-wrap: break-word;
+    overflow-y: scroll;
+}
+
+.popup-icon {
+    right: 6px;
+    top: 6px;
+    color: white;
+    display: grid;
+    place-items: center;
+}
