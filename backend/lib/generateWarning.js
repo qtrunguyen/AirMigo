@@ -37,5 +37,5 @@ export async function generateWarning(latitude, longitude){
         stream: false,
     });
     
-    return chat.choices[0];
+    return chat.choices[0].message.content;
 }
