@@ -1,4 +1,5 @@
 import { useMap, AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
+import { Circle } from "@react-google-maps/api";
 
 const PoiMarkers = ({
     pois,
