@@ -4,7 +4,7 @@
     --lime: #cbfd56;
     --lime2: rgba(203, 253, 86, 0.5);
     --silver: rgb(194, 194, 194);
-    --electric-blue: hwb(183 20% 7%);
+    --electric-blue: #33e4ed;
     --electric-blue2: rgba(50, 227, 236, 0.5);
     --outer-space: 4px;
 }
@@ -41,6 +41,11 @@ button {
     outline: unset;
     border: unset;
     cursor: pointer;
+    transition: 0.5s;
+}
+
+button:hover {
+    color: var(--lime) !important;
 }
 
 a:hover {
@@ -255,6 +260,8 @@ body.loading {
         width: 100%;
         height: 100px;
         padding: 10px;
+        outline: none;
+        border-radius: 5px;
     }
 }
 

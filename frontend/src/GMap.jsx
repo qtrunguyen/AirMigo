@@ -14,6 +14,7 @@ const pois = [
         location: { lat: lat_default, lng: lng_default },
     },
 ];
+const circles = []
 
 function GMap() {
     const [latitude, setLatitude] = useState(lat_default);
@@ -21,7 +22,7 @@ function GMap() {
     const [conditions, setConditions] = useState("");
     const [response, setResponse] = useState("");
     const [openChat, setOpenChat] = useState(false);
-
+    
     const GMAPJS = import.meta.env.VITE_GMAPJS;
     const GMAPID = import.meta.env.VITE_GMAPID;
 
@@ -55,7 +56,19 @@ function GMap() {
         }
     };
 
+
+    const delCircle = () => {
+        circles.forEach(circle => {
+            circle.setMap(null)
+        })
+    }
+
+    const addCircle = (circle) => {
+        circles.push(circle)
+    }
+
     const updateLatLng = (lat, lng, map) => {
+        delCircle();
         setLatitude(lat);
         setLongitude(lng);
         map.moveCamera({ center: { lat, lng } });
@@ -80,6 +93,7 @@ function GMap() {
                         longitude={longitude}
                         fetchData={fetchData}
                         setOpenChat={setOpenChat}
+                        addCircle={addCircle}
                     />
                 </Map>
                 <Panel
@@ -89,7 +103,11 @@ function GMap() {
                     fetchData={fetchData}
                     setOpenChat={setOpenChat}
                 ></Panel>
-                <Popup response={response} openChat={openChat} setOpenChat={setOpenChat}></Popup>
+                <Popup
+                    response={response}
+                    openChat={openChat}
+                    setOpenChat={setOpenChat}
+                ></Popup>
             </APIProvider>
         </div>
     );

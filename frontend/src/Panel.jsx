@@ -37,7 +37,7 @@ export default function Panel({
                 <FaAngleDown />
             </button>
             <div className="panel-content">
-                <label htmlFor="condition-input">
+                <label htmlFor="condition-inpu">
                     <div className="big">Personalize</div>
                     <div className="small">Receive more detailed feedbacks by giving our assistant more details on you and your medical conditions</div>
                 </label>
@@ -53,7 +53,7 @@ export default function Panel({
                     Get insights
                 </button>
 
-                <label htmlFor="locate-me">
+                <label htmlFor="locate-m">
                     <div className="big">Locate me</div>
                     <div className="small">Assess the air around you when you allow location permission for this site</div>
                 </label>
@@ -62,7 +62,7 @@ export default function Panel({
                     <div>Locate me!</div>
                 </button>
 
-                <label htmlFor="toggle-assistant">
+                <label htmlFor="toggle-assistan">
                     <div className="big">Toggle AI Assistant</div>
                     <div className="small">Open the AI Assistant insights window</div>
                 </label>
