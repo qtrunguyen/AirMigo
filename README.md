@@ -1,4 +1,5 @@
-# AirMigo(Cal Hacks 11.0)
+# AirMigo (Cal Hacks 11.0)
+Helping respiratory patients with real-time AI-powered air quality monitoring for better health management
 
 ## Inspiration
 Our inspiration came from the growing concern over air pollution and its detrimental effects on individuals with respiratory conditions like asthma and allergies. Most available AQI data only updates hourly, making it difficult for people to track real-time changes. We wanted to create a solution that provides real-time, personalized, and actionable alerts, helping individuals proactively manage their health and stay safe.
