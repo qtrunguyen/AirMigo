@@ -14,13 +14,13 @@ app.use(cors({
 app.use(express.json())
 
 app.post('/groq', async (req, res) => {
-    let {latitude, longitude} = req.body
+    let {latitude, longitude, conditions} = req.body
     await getCurrentAir(latitude, longitude);
     await fetchTrafficDensity(latitude, longitude);
-    res.send(await generateWarning(latitude, longitude))
+    res.send(await generateWarning(latitude, longitude, conditions))
 })
 
-const port = 3000;
+const port = 4000;
 app.listen(port, () => {
     console.log('Listening on port ' + port)
 })
