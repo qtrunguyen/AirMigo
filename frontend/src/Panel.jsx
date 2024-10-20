@@ -7,7 +7,7 @@ export default function Panel({
     conditions,
     setConditions,
     updateLocation,
-    updateResponse
+    setOpenChat
 }) {
     const map = useMap();
     const handleLocationUpdate = (e) => {
@@ -28,8 +28,7 @@ export default function Panel({
     };
 
     const handleToggleAssistant = (event) => {
-        console.log('handleToggleAssistant')
-        updateResponse()
+        setOpenChat(prev => !prev);
     }
 
     return (

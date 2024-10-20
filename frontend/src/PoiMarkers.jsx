@@ -5,6 +5,8 @@ const PoiMarkers = ({
     updateLatLng,
     latitude,
     longitude,
+    fetchData,
+    setOpenChat
 }) => {
     const map = useMap();
 
@@ -12,6 +14,8 @@ const PoiMarkers = ({
         const lat = e.latLng.lat();
         const lng = e.latLng.lng();
         updateLatLng(lat, lng, map);
+        fetchData();
+        setOpenChat(true)
     };
 
     return (

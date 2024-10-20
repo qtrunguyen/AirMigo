@@ -20,6 +20,7 @@ function GMap() {
     const [longitude, setLongitude] = useState(lng_default);
     const [conditions, setConditions] = useState("");
     const [response, setResponse] = useState("");
+    const [openChat, setOpenChat] = useState(false);
 
     const GMAPJS = import.meta.env.VITE_GMAPJS;
     const GMAPID = import.meta.env.VITE_GMAPID;
@@ -60,10 +61,6 @@ function GMap() {
         map.moveCamera({ center: { lat, lng } });
     };
 
-    const updateResponse = () => {
-        setResponse((prev) => prev + " ");
-    };
-
     const handleFinishLoading = () => {
         document.body.classList.remove("loading");
     };
@@ -81,6 +78,8 @@ function GMap() {
                         updateLatLng={updateLatLng}
                         latitude={latitude}
                         longitude={longitude}
+                        fetchData={fetchData}
+                        setOpenChat={setOpenChat}
                     />
                 </Map>
                 <Panel
@@ -88,9 +87,9 @@ function GMap() {
                     updateLocation={updateLocation}
                     setConditions={setConditions}
                     fetchData={fetchData}
-                    updateResponse={updateResponse}
+                    setOpenChat={setOpenChat}
                 ></Panel>
-                <Popup response={response}></Popup>
+                <Popup response={response} openChat={openChat} setOpenChat={setOpenChat}></Popup>
             </APIProvider>
         </div>
     );
