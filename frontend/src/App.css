@@ -1,10 +1,10 @@
 :root {
     --night: #0A0A0A;
     --white: #FFFFFF;
-    --lime: rgba(203, 253, 86, 1);
+    --lime: #cbfd56;
     --lime2: rgba(203, 253, 86, 0.5);
     --silver: rgb(194, 194, 194);
-    --electric-blue: rgba(50, 227, 236, 1);
+    --electric-blue: hwb(183 20% 7%);
     --electric-blue2: rgba(50, 227, 236, 0.5);
     --outer-space: 4px;
 }
@@ -24,10 +24,10 @@
 }
 
 * {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
@@ -44,7 +44,7 @@ button {
 }
 
 a:hover {
-    color: green;
+    color: var(--lime);
 }
 
 body {
@@ -53,7 +53,68 @@ body {
     width: 100vw;
     height: 100vh;
     position: relative;
+    overflow: hidden;
+    filter: blur(0px);
+    transition: 0.5s;
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+    }
 }
+
+
+body.loading {
+    #nav {
+        filter: blur(1px);
+    }
+    #map-container {
+        filter: blur(1px);
+    }
+    .overlay {
+        
+        z-index: 100;
+        height: 100vh;
+        width: 100vw;
+    
+        background: rgb(12, 12, 12, 0.3);
+        color: white;
+        display: grid;
+        place-items: center;
+    }
+    .loading-container {
+        border-radius: 5px;
+        padding: 20px;
+        background:
+            linear-gradient(70deg, var(--lime2), var(--electric-blue2)),
+            linear-gradient(120deg, var(--electric-blue2), var(--lime2)),
+            linear-gradient(170deg, var(--lime2), var(--electric-blue2));
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .loading-spin {
+        font-size: 3rem;
+        display: grid;
+        place-items: center;
+        animation: spin 2s infinite ease-in-out;
+    }
+    
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+    
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+
 
 #root {
     max-width: 100vw;
@@ -74,8 +135,14 @@ body {
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
-    padding: 10px 20px 10px 20px;
+    padding: 20px 25px 20px 25px;
     background: var(--night);
+    filter: blur(0px);
+    font-size: 1.25rem;
+}
+#nav a {
+    display: grid;
+    place-items: center;
 }
 
 .navigation-link {
@@ -83,8 +150,7 @@ body {
 }
 
 .nav-logo {
-    height: 24px;
-    width: 24px;
+    height: 40px;
 }
 
 #map-container {
@@ -94,6 +160,7 @@ body {
     flex: 1;
     position: relative;
     overflow: hidden;
+    filter: blur(0px);
 }
 
 .panel {
@@ -102,8 +169,8 @@ body {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);
-    height: 96%;
-    width: 100%;
+    height: 90%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -123,7 +190,7 @@ body {
 .panel.closed {
     transform: translate(-50%, calc(100% - 30px));
 
-    svg {
+    .panel-header svg {
         transform: rotateZ(540deg);
     }
 }
@@ -150,14 +217,28 @@ body {
     flex: 1;
     padding: 5px;
     width: 96%;
+    padding: 20px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    label {
+        width: 100%;
+    }
 
     button {
+        width: max-content;
         border-radius: 5px;
         color: var(--white);
         background: var(--night);
         display: flex;
-        padding: 5px;
-        gap: 5px;
+        padding: 10px;
+        gap: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 1rem;
     }
 
     border-top-left-radius: 5px;
@@ -173,6 +254,7 @@ body {
         resize: none;
         width: 100%;
         height: 100px;
+        padding: 10px;
     }
 }
 
@@ -181,7 +263,7 @@ body {
     bottom: 5px;
     right: 5px;
     width: 300px;
-    height: 100px;
+    height: 200px;
     background: var(--night);
     border: solid 2px white;
     border-radius: 10px;
@@ -189,10 +271,16 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    transition: 0.5s;
+    transform: translateY(120%);
+}
+
+.popup-container.open {
+    transform: translateY(0%);
 }
 
 .popup-header {
-    padding: 5px;
+    padding: 10px;
     width: 100%;
     background:
         linear-gradient(70deg, var(--lime2), var(--electric-blue2)),
@@ -211,7 +299,7 @@ body {
 
 .popup-content {
     flex: 1;
-    padding: 5px;
+    padding: 10px;
     word-wrap: break-word;
     overflow-y: scroll;
 }
@@ -222,4 +310,12 @@ body {
     color: white;
     display: grid;
     place-items: center;
+}
+
+.big {
+    font-size: 1rem;
+}
+
+.small {
+    font-weight: 100;
 }

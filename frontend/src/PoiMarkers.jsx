@@ -1,27 +1,34 @@
 import { useMap, AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
 
-const PoiMarkers = ({ pois, background, glyphColor, borderColor, updateLatLng }) => {
-  const map = useMap()
-  
+const PoiMarkers = ({
+    pois,
+    updateLatLng,
+    latitude,
+    longitude,
+}) => {
+    const map = useMap();
+
     const handleDrag = (e) => {
-        const lat = e.latLng.lat()
-        const lng = e.latLng.lng()
-        updateLatLng(lat, lng, map)
+        const lat = e.latLng.lat();
+        const lng = e.latLng.lng();
+        updateLatLng(lat, lng, map);
     };
 
     return (
         <>
-            {pois.map((poi) => (
+            {pois.map((poi, i) => (
                 <AdvancedMarker
-                    key={poi.key}
-                    position={poi.location}
+                    id={poi.key}
+                    key={i}
+                    position={{ lat: latitude, lng: longitude }}
                     draggable={true}
                     onDragEnd={handleDrag}
                 >
                     <Pin
-                        background={background}
-                        glyphColor={glyphColor}
-                        borderColor={borderColor}
+                        background={"#000000"}
+                        glyphColor={"#ffffff"}
+                        borderColor={"#cbfd56"}
+                        scale={1.6}
                     />
                 </AdvancedMarker>
             ))}

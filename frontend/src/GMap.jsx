@@ -10,7 +10,7 @@ const lng_default = 151.1987113;
 const ZOOM = 15;
 const pois = [
     {
-        key: "hi",
+        key: "Current position",
         location: { lat: lat_default, lng: lng_default },
     },
 ];
@@ -25,6 +25,7 @@ function GMap() {
     const GMAPID = import.meta.env.VITE_GMAPID;
 
     const fetchData = async () => {
+        document.body.classList.add("loading");
         try {
             const response = await axios.post("http://localhost:4000/groq", {
                 latitude: latitude,
@@ -35,6 +36,7 @@ function GMap() {
         } catch (error) {
             console.error("Error fetching data:", error);
         }
+        document.body.classList.remove("loading");
     };
 
     const updateLocation = (map) => {
@@ -58,21 +60,35 @@ function GMap() {
         map.moveCamera({ center: { lat, lng } });
     };
 
+    const updateResponse = () => {
+        setResponse((prev) => prev + " ");
+    };
+
+    const handleFinishLoading = () => {
+        document.body.classList.remove("loading");
+    };
+
     return (
         <div id="map-container">
-            <APIProvider apiKey={GMAPJS}>
+            <APIProvider apiKey={GMAPJS} onLoad={handleFinishLoading}>
                 <Map
                     mapId={GMAPID}
                     defaultZoom={ZOOM}
                     defaultCenter={{ lat: latitude, lng: longitude }}
                 >
-                    <PoiMarkers pois={pois} updateLatLng={updateLatLng}/>
+                    <PoiMarkers
+                        pois={pois}
+                        updateLatLng={updateLatLng}
+                        latitude={latitude}
+                        longitude={longitude}
+                    />
                 </Map>
                 <Panel
                     condition={conditions}
                     updateLocation={updateLocation}
                     setConditions={setConditions}
                     fetchData={fetchData}
+                    updateResponse={updateResponse}
                 ></Panel>
                 <Popup response={response}></Popup>
             </APIProvider>
