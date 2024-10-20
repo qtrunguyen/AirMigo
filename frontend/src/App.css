@@ -169,6 +169,11 @@ body {
     linear-gradient(120deg, var(--electric-blue2), var(--lime2)),
     linear-gradient(170deg, var(--lime2), var(--electric-blue2));
 
+    textarea {
+        resize: none;
+        width: 100%;
+        height: 100px;
+    }
 }
 
 .popup-container {
