@@ -13,7 +13,7 @@ export async function generateWarning(latitude, longitude, conditions){
         You are an expert environmental scientist.
         Given the following Traffic and Air Quality Data: ${JSON.stringify(joinData)}
         In under 40 words output a message.
-        The message give the brief of the air quality in the area, and base on user health condition: ${conditions}, suggest any actions, warnings or precautions users should take.
+        The message give the brief of the air quality in the area and how current weather and traffic might affect air quality, and base on user health condition: ${conditions}, suggest any actions, warnings or precautions users should take.
     `;
 
     const chat = await groq.chat.completions.create({
