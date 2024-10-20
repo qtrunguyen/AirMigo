@@ -1,29 +1,40 @@
-import React from "react";
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import React, { useRef, useEffect } from "react";
+import { APIProvider, Map, useMap } from "@vis.gl/react-google-maps";
+import PoiMarkers from "./PoiMarkers";
+import Panel from "./Panel";
+
+// default
+let LAT = -33.860664;
+let LNG = 151.208138;
+let ZOOM = 13;
+
+const pois = []
 
 function GMap() {
-  const GMAPJS = import.meta.env.DEV
-    ? import.meta.env.VITE_GMAPJS
-    : "skibidi toilet rizz";
+  const GMAPJS = import.meta.env.VITE_GMAPJS;
+  const GMAPID = import.meta.env.VITE_GMAPID;
+
+  const onLoad = (ev) => {
+    console.log("Maps API has loaded");
+  };
+
+  const onCameraChanged = (ev) => {
+    console.log("camera changed:", ev.detail.center);
+    console.log("zoom:", ev.detail.zoom);
+  };
 
   return (
     <div id="map-container">
-      <APIProvider
-        apiKey={GMAPJS}
-        onLoad={() => console.log("Maps API has loaded")}
-      >
+      <APIProvider apiKey={GMAPJS} onLoad={onLoad}>
         <Map
-          defaultZoom={13}
-          defaultCenter={{ lat: -33.860664, lng: 151.208138 }}
-          onCameraChanged={(ev) =>
-            console.log(
-              "camera changed:",
-              ev.detail.center,
-              "zoom:",
-              ev.detail.zoom
-            )
-          }
-        ></Map>
+          mapId={GMAPID}
+          defaultZoom={ZOOM}
+          defaultCenter={{ lat: LAT, lng: LNG }}
+          onCameraChanged={onCameraChanged}
+        >
+          <PoiMarkers pois={pois} />
+        </Map>
+        <Panel></Panel>
       </APIProvider>
     </div>
   );

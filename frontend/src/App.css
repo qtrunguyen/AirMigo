@@ -1,10 +1,12 @@
 :root {
     --night: #0A0A0A;
     --white: #FFFFFF;
-    --lime: #CBFD56;
-    --silver: #C2C2C2;
-    --electric-blue: #33E3EC;
-    --outer-space: 15px;
+    --lime: rgba(203, 253, 86, 1);
+    --lime2: rgba(203, 253, 86, 0.5);
+    --silver: rgb(194, 194, 194);
+    --electric-blue: rgba(50, 227, 236, 1);
+    --electric-blue2: rgba(50, 227, 236, 0.5);
+    --outer-space: 4px;
 }
 
 * {
@@ -12,6 +14,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+a {
+    transition: 0.5s;
+    text-decoration: unset;
+    color: unset;
+}
+
+button {
+    background: unset;
+    outline: unset;
+    border: unset;
+    cursor: pointer;
+}
+
+a:hover {
+    color: green;
 }
 
 body {
@@ -29,6 +48,10 @@ body {
     flex-direction: column;
     gap: var(--outer-space);
     padding: var(--outer-space);
+    background:
+        linear-gradient(70deg, var(--lime), var(--electric-blue) ),
+        linear-gradient(120deg, var(--electric-blue), var(--lime) ),
+        linear-gradient(170deg, var(--night), var(--electric-blue));
 }
 
 #nav {
@@ -36,9 +59,13 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background: var(--white);
     border-radius: 10px;
-    padding: 10px;
+    padding: 10px 20px 10px 20px;
+    background: var(--night);   
+}
+
+.navigation-link {
+    color: white;
 }
 
 .nav-logo {
@@ -51,4 +78,79 @@ body {
     max-width: 100%;
     background: white;
     flex: 1;
+    position: relative;
+    overflow: hidden;
 }
+
+.panel {
+    background: lightskyblue;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 96%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow: hidden;
+    transition: 0.5s;
+    background: transparent;
+
+    svg {
+        transition: 0.5s;
+    }
+    
+}
+
+
+.panel.closed {
+    transform: translate(-50%, calc(100% - 30px));
+
+    svg {
+        transform: rotateZ(540deg);
+    }
+}
+
+.panel-header {
+    height: 30px;
+    width: 100px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+        color: white;
+        font-size: 1.5rem;
+    }
+    padding: 5px;
+    background: var(--night);
+}
+
+.panel-content {
+    flex: 1;
+    padding: 5px;
+    width: 96%;
+    button {
+        border-radius: 5px;
+        color: var(--white);
+        background: var(--night);
+        display: flex;
+        padding: 5px;
+        gap: 5px;
+    }
+    border-top-left-radius: 5px; 
+    border-top-right-radius: 5px; 
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    background:
+        linear-gradient(70deg, var(--lime2), var(--electric-blue2)),
+        linear-gradient(120deg, var(--electric-blue2), var(--lime2)),
+        linear-gradient(170deg, var(--lime2), var(--electric-blue2));
+    
+}
+
