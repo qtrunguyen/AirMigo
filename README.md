@@ -1,3 +1,4 @@
+![Demo](demo.png)
 # AirMigo (Cal Hacks 11.0)
 Helping respiratory patients with real-time AI-powered air quality monitoring for better health management
 
